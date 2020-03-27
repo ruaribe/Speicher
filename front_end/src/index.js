@@ -3,10 +3,10 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import App from './components/App.jsx'
 import configureStore from './store/index'
-import { verifyCredentials } from './redux-token-auth-config' // <-- note this is YOUR file, not the redux-token-auth NPM module
+import { verifyCredentials } from './redux-token-auth-config'
 
 const store = configureStore()
-verifyCredentials(store) // <-<-<-<-<- here's the important part <-<-<-<-<-
+verifyCredentials(store)
 
 ReactDOM.render(
   <Provider store={store}>

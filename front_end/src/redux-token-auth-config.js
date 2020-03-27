@@ -1,14 +1,16 @@
-import { generateAuthActions } from 'redux-token-auth'
+import { generateAuthActions } from '@keymastervn/redux-token-auth'
 import { authUrl } from './constants'
 
 const config = {
   authUrl,
+  storage: window.localStorage,
   userAttributes: {
-    firstName: 'first_name',
+    name: 'name',
     imageUrl: 'image',
   },
   userRegistrationAttributes: {
-    firstName: 'first_name',
+    name: 'name',
+    passwordConfirmation: "password_confirmation"
   },
 }
 
@@ -19,9 +21,13 @@ const {
   verifyCredentials,
 } = generateAuthActions(config)
 
+const authHeaderKeys = ["access-token", "token-type", "client", "expiry", "uid"]
+
+
 export {
   registerUser,
   signInUser,
   signOutUser,
   verifyCredentials,
+  authHeaderKeys
 }

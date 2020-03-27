@@ -1,35 +1,75 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { signInUser } from '../redux-token-auth-config' // <-- note this is YOUR file, not the redux-token-auth NPM module
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { signInUser } from '../redux-token-auth-config'; 
+import { Col,  Form, Button } from 'react-bootstrap';
+import { registerUpdateParams } from '../actions/register/index'
 
 class SignInScreen extends Component {
-//  constructor (props) {  }
 
-  
+  onChangeHndler = (event, key) => {
+    this.props.registerUpdateParams(key, event.target.value)
+  };
 
-  submitForm (e) {
+  submitForm = (e) => {
     e.preventDefault()
     const { signInUser } = this.props
     const {
       email,
       password,
-    } = this.state
-    signInUser({ email, password }) // <-<-<-<-<- here's the important part <-<-<-<-<-
-      .then()
-      .catch()
+    } = this.props.registerReducer
+    
+
+    
+  signInUser({ email, password })
+    .then()
+    .catch()
+    
   }
 
-  render () {
-    const { submitForm } = this
+  render() {
+    const {
+      email,
+      password,
+    } = this.props
+    const { submitForm, onChangeHndler } = this
     return (
-      <div>
-        <form onSubmit={submitForm}>...</form>
-      </div>
+      <Form onSubmit = { submitForm }>
+        <Col>
+          <Form.Group controlId="email">
+            <Form.Label>メールアドレス</Form.Label>
+            <Form.Control
+              type="text"
+              value={email}
+              onChange={event => onChangeHndler(event, "email")}
+            />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>パスワード</Form.Label>
+            <Form.Control
+              type="password"
+              value={password}
+              onChange={event => onChangeHndler(event, "password")}
+            />
+          </Form.Group>
+        </Col>
+
+        <Button variant="primary" type="submit">
+          ログイン
+        </Button>
+      </Form>
     )
   }
 }
 
+
+
+const mapStateToProps =  (store) => {
+  return {
+    registerReducer: store.registerReducer,
+  }
+}
+
 export default connect(
-  null,
-  { signInUser },
+  mapStateToProps,
+  { signInUser, registerUpdateParams  },
 )(SignInScreen)
