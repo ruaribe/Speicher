@@ -21,7 +21,7 @@ class SignInScreen extends Component {
 
     
   signInUser({ email, password })
-    .then()
+    .then(this.props.history.replace("/mypage"))
     .catch()
     
   }
