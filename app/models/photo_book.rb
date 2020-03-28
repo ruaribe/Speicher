@@ -1,0 +1,2 @@
+class PhotoBook < ApplicationRecord
+end
