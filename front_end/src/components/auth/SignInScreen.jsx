@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../redux-token-auth-config'; 
+import { signInUser } from '../../redux-token-auth-config'; 
 import { Col,  Form, Button } from 'react-bootstrap';
-import { registerUpdateParams } from '../actions/register/index'
+import { registerUpdateParams } from '../../actions/register/index'
 
 class SignInScreen extends Component {
 
@@ -12,37 +12,29 @@ class SignInScreen extends Component {
 
   submitForm = (e) => {
     e.preventDefault()
-    const { registerUser } = this.props
+    const { signInUser } = this.props
     const {
-      name,
       email,
       password,
-      passwordConfirmation
     } = this.props.registerReducer
+    
 
-    registerUser({ name, email, password, passwordConfirmation })
-      .then()
-      .catch()
+    
+  signInUser({ email, password })
+    .then(this.props.history.replace("/mypage"))
+    .catch()
+    
   }
 
   render() {
     const {
-      name,
       email,
       password,
-      passwordConfirmation
     } = this.props
     const { submitForm, onChangeHndler } = this
     return (
       <Form onSubmit = { submitForm }>
         <Col>
-          <Form.Group controlId="name">
-            <Form.Label>ユーザー名</Form.Label>
-            <Form.Control
-              type="text"
-              value={name}
-              onChange={event => onChangeHndler(event, "name")}/>
-          </Form.Group>
           <Form.Group controlId="email">
             <Form.Label>メールアドレス</Form.Label>
             <Form.Control
@@ -57,14 +49,6 @@ class SignInScreen extends Component {
               type="password"
               value={password}
               onChange={event => onChangeHndler(event, "password")}
-            />
-          </Form.Group>
-          <Form.Group controlId="passwordConfirmation">
-            <Form.Label>パスワード確認</Form.Label>
-            <Form.Control
-              type="password"
-              value={passwordConfirmation}
-              onChange={event => onChangeHndler(event, "passwordConfirmation")}
             />
           </Form.Group>
         </Col>
@@ -87,5 +71,5 @@ const mapStateToProps =  (store) => {
 
 export default connect(
   mapStateToProps,
-  { registerUser, registerUpdateParams  },
+  { signInUser, registerUpdateParams  },
 )(SignInScreen)

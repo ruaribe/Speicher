@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { signOutUser } from '../redux-token-auth-config' // <-- note this is YOUR file, not the redux-token-auth NPM module
+import { signOutUser } from '../../redux-token-auth-config' // <-- note this is YOUR file, not the redux-token-auth NPM module
 
 class SiteHeader extends Component {
   constructor(props) {
