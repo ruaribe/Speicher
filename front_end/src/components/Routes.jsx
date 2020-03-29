@@ -5,9 +5,9 @@ import {
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import HomePage from './HomePage';
-import SignInPage from './SignInScreen';
+import SignInPage from './auth/SignInScreen';
 import { generateRequireSignInWrapper } from '@keymastervn/redux-token-auth';
-import RegisterScreen from './RegisterScreen';
+import RegisterScreen from './auth/RegisterScreen';
 import MyPage from './MyPage';
 
 const requireSignIn = generateRequireSignInWrapper({

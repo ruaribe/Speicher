@@ -1,35 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { API_URL } from '../../constants';
+import { fetchPhotoBooks } from '../../actions/photo_book/index';
+import { Link } from 'react-router-dom';
 
-const PhotoBookList = () => {
-
-  const photo_books = props.photo_book
-
-  const deleateProduct = (id) => {
-    axios.delete(`${API_URL}/photo_book/${id}`)
-    .then((response) => {
-      const productIndex = this.state.products.findIndex(x => x.id === id)
-      const deletedProducts = update(this.state.products, {$splice: [[productIndex, 1]]})
-      this.setState({products: deletedProducts})
-      console.log('set')
-    })
-    .catch((data) =>{
-      console.log(data)
-    })
+class PhotoBookList extends React.Component {
+  constructor(props) {
+    super(props)
   }
-  
-  
 
-  return (
-    
-    <div>
+  async componentDidMount() {
+    await this.props.fetchPhotoBooks();
+  };
 
-    </div>
-  )
+  render() {
+    const photoBookItems = this.props.photoBook.photoBooks.map((photo_book, index) => {
+      return (
+        <div key={index}>
+            {photo_book.name}
+        </div>
+      );
+    });
+
+    return (
+      <div>
+        <h1>アルバム一覧</h1>
+        <div className='PhotoBookList'>
+          <div>{photoBookItems}</div>
+        </div>
+        <hr />
+        <Link to='/'>トップページへ</Link>
+      </div>
+    )
+  }
+}
+
+
+const mapStateToProps =  (store) => {
+  return {
+    photoBook: store.photoBook,
+  }
+}
+
+const mapDispatchToProps = {
+  
 }
 
 export default connect(
-  null,
-  {}
+  mapStateToProps,
+  { ...mapDispatchToProps, fetchPhotoBooks }
 )(PhotoBookList);

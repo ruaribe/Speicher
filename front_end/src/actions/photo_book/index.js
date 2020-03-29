@@ -6,7 +6,8 @@ import {
   PHOTO_BOOK_UPDATE_PARAMS,
   FETCH_PHOTO_BOOKS_REQUEST,
   FETCH_PHOTO_BOOKS_SUCCESS,
-  FETCH_PHOTO_BOOKS_FAILURE
+  FETCH_PHOTO_BOOKS_FAILURE,
+  PHOTO_BOOK_DELETE
 } from '../../constants';
 
 const fetchPhotoBooksRequest = () => {
@@ -31,16 +32,16 @@ const fetchPhotoBooksFailure = (error) => {
 
 const fetchPhotoBooks = () => {
   return async (dispatch) => {
-    dispatch(fetchPhotoBooksRequest());
-
+    fetchPhotoBooksRequest();
     try {
-      const response = await axios.get(`${API_URL}/photobooks`);
-      const data = response.data.results;
+      const response = await axios.get(`${API_URL}/photo_books`);
+      const data = response.data;
       dispatch(fetchPhotoBooksSuccess(data));
     } catch (error) {
       dispatch(fetchPhotoBooksFailure(error));
-    }
-  };
+    };
+  }
+
 };
 
 const photoBookUpdateParams = (key, value) => {
