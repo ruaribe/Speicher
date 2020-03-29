@@ -1,3 +1,6 @@
+import axios from '../../axios_helper';
+
+
 import {
   PHOTO_BOOK_UPDATE_PARAMS,
   FETCH_PHOTO_BOOKS_REQUEST,
@@ -25,6 +28,20 @@ const fetchPhotoBooksFailure = (error) => {
   }
 };
 
+const fetchPhotoBooks = () => {
+  return async (dispatch) => {
+    dispatch(fetchPhotoBooksRequest());
+
+    try {
+      const response = await axios.get(`${API_URL}/photobooks`);
+      const data = response.data.results;
+      dispatch(fetchPhotoBooksSuccess(data));
+    } catch (error) {
+      dispatch(fetchPhotoBooksFailure(error));
+    }
+  };
+};
+
 const photoBookUpdateParams = (key, value) => {
   return ({
     type: PHOTO_BOOK_UPDATE_PARAMS,
@@ -44,6 +61,7 @@ export {
   fetchPhotoBooksRequest,
   fetchPhotoBooksSuccess,
   fetchPhotoBooksFailure,
+  fetchPhotoBooks,
   photoBookUpdateParams,
   photoBookDelete
 };
