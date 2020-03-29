@@ -2,6 +2,7 @@ import axios from '../../axios_helper';
 
 
 import {
+  API_URL,
   PHOTO_BOOK_UPDATE_PARAMS,
   FETCH_PHOTO_BOOKS_REQUEST,
   FETCH_PHOTO_BOOKS_SUCCESS,
