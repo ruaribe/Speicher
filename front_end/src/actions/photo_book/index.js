@@ -1,6 +1,8 @@
 import {
   PHOTO_BOOK_UPDATE_PARAMS,
-  FETCH_PHOTO_BOOKS_REQUEST
+  FETCH_PHOTO_BOOKS_REQUEST,
+  FETCH_PHOTO_BOOKS_SUCCESS,
+  FETCH_PHOTO_BOOKS_FAILURE
 } from '../../constants';
 
 const fetchPhotoBooksRequest = () => {
@@ -18,7 +20,7 @@ const fetchPhotoBooksSuccess = (data) => {
 
 const fetchPhotoBooksFailure = (error) => {
   return {
-    type: FETCH_QUIZZES_FAILURE,
+    type: FETCH_PHOTO_BOOKS_FAILURE,
     error
   }
 };
